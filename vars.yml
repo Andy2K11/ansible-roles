@@ -1,0 +1,3 @@
+---
+# Test role vars here
+java_state: present

@@ -1,0 +1,6 @@
+---
+- name: "Ensure Java JDKs {{ java_state }}"
+  apt:
+    name: "{{ java_packages }}"
+    state: "{{ java_state }}"
+    autoremove: yes

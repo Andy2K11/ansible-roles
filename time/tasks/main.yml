@@ -1,0 +1,11 @@
+---
+- name: Ensure NTP Installed
+  apt:
+    name: ntp
+    state: present
+
+- name: Ensure NTP Running
+  service:
+    name: ntp
+    state: started
+    enabled: yes

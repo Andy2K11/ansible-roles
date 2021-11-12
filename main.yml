@@ -1,0 +1,25 @@
+---
+- name: Test Roles On Vagrant Box
+  hosts: all
+  become: yes
+
+  pre_tasks:
+    - name: Ensure Apt Cache Updated
+      apt:
+        update_cache: true
+        cache_valid_time: 3600  # 1 hour
+    - name: Clean Apt Cache
+      apt:
+        autoclean: yes
+
+  vars_files:
+    - vars.yml
+
+  roles:
+    - java
+    - time
+
+  tasks:
+    - name: Print Arch
+      debug:
+        msg: "{{ ansible_machine }}"
