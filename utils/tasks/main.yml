@@ -1,0 +1,5 @@
+---
+- name: Ensure CLI Utils Installed
+  apt:
+    name: "{{ packages }}"
+    state: present

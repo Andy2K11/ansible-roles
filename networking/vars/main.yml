@@ -1,0 +1,5 @@
+---
+packages:
+  - net-tools   # netstat
+  - nmap
+  - wireshark   # https://1.eu.dl.wireshark.org/src/wireshark-3.4.9.tar.xz
