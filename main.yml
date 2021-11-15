@@ -18,19 +18,21 @@
   roles:
     - java
     - networking
+    - proxy_client
+    - squid_proxy
     - time
     - utils
 
-  tasks:
-    - name: Print Arch
-      debug:
-        msg: "{{ ansible_machine }}"
-    - name: Print Family
-      debug:
-        msg: "{{ ansible_os_family }}"
-    - name: Print Home
-      debug:
-        msg: "{{ ansible_env.HOME }}"
-    - name: Print User
-      debug:
-        msg: "{{ ansible_user }}"
+  # tasks:
+  #   - name: Print Arch
+  #     debug:
+  #       msg: "{{ ansible_machine }}"
+  #   - name: Print Family
+  #     debug:
+  #       msg: "{{ ansible_os_family }}"
+  #   - name: Print Home
+  #     debug:
+  #       msg: "{{ ansible_env.HOME }}"
+  #   - name: Print User
+  #     debug:
+  #       msg: "{{ ansible_user }}"

@@ -1,0 +1,16 @@
+---
+# https://ubuntu.com/server/docs/proxy-servers-squid
+
+- name: Ensure Squid Cache Proxy Installed
+  apt:
+    name: squid
+    state: present
+
+- name: Configure Squid
+  copy:
+    src: squid.conf
+    dest: /etc/squid/conf.d/
+    mode: 0644
+  notify: restart squid
+
+  # curl --proxy localhost:3128 http://www.google.com
