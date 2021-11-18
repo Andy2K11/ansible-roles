@@ -4,14 +4,14 @@ UBUNTU = "ubuntu/hirsute64"     # Problems with apt
 BENTO = "bento/ubuntu-21.04"
 GENERIC = "generic/ubuntu2004"
 
-# https://www.vagrantup.com/docs/provisioning/ansible_intro
-
 Vagrant.configure(API_VERSION) do |config|
 
     # General vagrant configuration
     config.vm.box = BENTO
     config.ssh.insert_key = false
+    config.ssh.port = 2891
     config.vm.synced_folder ".", "/vagrant", disabled: true
+    config.vm.synced_folder "~/.cache/apt", "/var/cache/apt"
     config.vm.provider "virtualbox" do |vb|
         vb.memory = 768
         vb.cpus = 1

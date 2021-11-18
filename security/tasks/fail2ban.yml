@@ -1,0 +1,19 @@
+---
+- name: Install fail2ban (RedHat).
+  yum:
+    name: fail2ban
+    state: present
+    enablerepo: epel
+  when: ansible_os_family == 'RedHat'
+
+- name: Install fail2ban (Debian).
+  apt:
+    name: fail2ban
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: Ensure fail2ban is running and enabled on boot.
+  service:
+    name: fail2ban
+    state: started
+    enabled: yes
