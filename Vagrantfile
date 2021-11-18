@@ -6,14 +6,16 @@ GENERIC = "generic/ubuntu2004"
 
 Vagrant.configure(API_VERSION) do |config|
 
-    # General vagrant configuration
-    config.vm.box = BENTO
+    # ansible needs access to the keyfile so use default insecure or provide own
     config.ssh.insert_key = false
+
     # Next two lines needed for custom guest ssh port; comment out for first boot before ansible security role run to use defaults
-    # config.ssh.port = 2222
-    # config.vm.network "forwarded_port", id: "ssh", host: 2222, guest: 2891
+    config.ssh.port = 2222
+    config.vm.network "forwarded_port", id: "ssh", host: 2222, guest: 2891
+
     config.vm.synced_folder ".", "/vagrant", disabled: true
-    config.vm.synced_folder "~/.cache/apt", "/var/cache/apt"
+    config.vm.synced_folder "~/.cache/apt", "/var/cache/apt"    # Let all VMs share apt cache
+
     config.vm.provider "virtualbox" do |vb|
         vb.memory = 512
         vb.cpus = 1
@@ -27,6 +29,7 @@ Vagrant.configure(API_VERSION) do |config|
     end
 
     config.vm.define "ubuntu" do |ubuntu|
+        ubuntu.vm.box = BENTO
         ubuntu.vm.hostname = "ubuntu.test"
         ubuntu.vm.network :private_network, ip: "192.168.60.51"
     end
