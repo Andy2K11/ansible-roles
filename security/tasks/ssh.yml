@@ -1,16 +1,26 @@
 ---
 - name: Update SSH configuration to be more secure.
-  lineinfile:
-    dest: /etc/ssh/sshd_config
-    regexp: "{{ item.regexp }}"
-    line: "{{ item.line }}"
-    state: present
+  template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config.d/sshd.conf
+    owner: root
+    group: root
+    mode: 0644
     validate: 'sshd -t -f %s'
-  with_items:
-    - regexp: "^PasswordAuthentication"
-      line: "PasswordAuthentication no"
-    - regexp: "^PermitRootLogin"
-      line: "PermitRootLogin no"
-    - regexp: "^Port"
-      line: "Port {{ ssh_port }}"
   notify: restart ssh
+
+# - name: Update SSH configuration to be more secure.
+#   lineinfile:
+#     dest: /etc/ssh/sshd_config
+#     regexp: "{{ item.regexp }}"
+#     line: "{{ item.line }}"
+#     state: present
+#     validate: 'sshd -t -f %s'
+#   with_items:
+#     - regexp: "^PasswordAuthentication"
+#       line: "# PasswordAuthentication no"
+#     - regexp: "^PermitRootLogin"
+#       line: "# PermitRootLogin no"
+#     - regexp: "^Port"
+#       line: "# Port {{ ssh_port }}"
+#   notify: restart ssh

@@ -1,5 +1,4 @@
 ---
-# unattended-upgrades
 - name: Install unattended upgrades package.
   apt:
     name: unattended-upgrades
