@@ -3,3 +3,7 @@
 - import_tasks: firewall.yml
 - import_tasks: updates.yml
 - import_tasks: fail2ban.yml
+- import_tasks: selinux.yml
+  when: ansible_os_family == 'RedHat'
+- import_tasks: apparmor.yml
+  when: ansible_os_family == 'Debian'

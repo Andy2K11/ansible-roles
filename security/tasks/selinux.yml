@@ -1,2 +1,17 @@
 ---
-# ToDo
+- name: Install Python SELinux library
+  yum:
+    name: python3-libselinx
+    state: present
+
+- name: Ensure SELinux is enabled in `targeted` mode
+  selinux:
+    policy: targeted
+    state: enforcing
+
+- name: Ensure httpd can connect to the network
+  seboolean:
+    name: httpd_can_network_connect
+    state: yes
+    persistent: yes
+  when: ansible_selinux.status == 'enabled'
