@@ -9,11 +9,13 @@ Vagrant.configure(API_VERSION) do |config|
     # General vagrant configuration
     config.vm.box = BENTO
     config.ssh.insert_key = false
-    config.ssh.port = 2891
+    # Next two lines needed for custom guest ssh port; comment out for first boot before ansible security role run to use defaults
+    # config.ssh.port = 2222
+    # config.vm.network "forwarded_port", id: "ssh", host: 2222, guest: 2891
     config.vm.synced_folder ".", "/vagrant", disabled: true
     config.vm.synced_folder "~/.cache/apt", "/var/cache/apt"
     config.vm.provider "virtualbox" do |vb|
-        vb.memory = 768
+        vb.memory = 512
         vb.cpus = 1
         vb.linked_clone = true
     end
