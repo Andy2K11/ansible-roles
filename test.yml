@@ -1,0 +1,7 @@
+---
+- name: Test single role
+  hosts: ubuntu
+  become: yes
+
+  roles:
+    - data_science

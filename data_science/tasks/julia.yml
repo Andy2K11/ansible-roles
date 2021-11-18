@@ -1,0 +1,25 @@
+---
+- name: Ensure Julia Downloaded
+  get_url:
+    url: "https://julialang-s3.julialang.org/bin/linux/x64/1.6/julia-{{ julia_version }}-linux-x86_64.tar.gz"
+    dest: /usr/local/tmp/julia-{{ julia_version }}-linux-x86_64.tar.gz
+    checksum: "sha256:c7459c334cd7c3e4a297baf52535937c6bad640e60882f9201a73bab9394314b"
+    owner: root
+    group: root
+    mode: 0644
+
+# Import signature to gpg
+
+# Validate tarball
+
+- name: Extract Archive
+  unarchive:
+    src: /usr/local/tmp/julia-{{ julia_version }}-linux-x86_64.tar.gz
+    dest: /usr/local/
+    remote_src: yes
+
+- name: Create Symbolic Link
+  file:
+    src: "/usr/local/julia-{{ julia_version }}/bin/julia"
+    dest: /usr/local/bin/julia
+    state: link
