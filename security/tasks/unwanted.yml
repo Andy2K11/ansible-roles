@@ -1,0 +1,17 @@
+---
+# - name: Ensure Services Stopped and Disabled
+#   service:
+#     name: "{{ item }}"
+#     state: stopped
+#     enabled: no
+#   with_items:
+#     - nfs-kernel-server.service
+#     - cups.service
+
+- name: Remove Packages
+  apt:
+    name:
+      - nfs-kernel-server # network file sharing, port 2049
+      - cups              # print server (internet printing protocol), port 631
+    state: absent
+    purge: yes
