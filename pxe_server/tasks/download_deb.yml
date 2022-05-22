@@ -1,0 +1,32 @@
+---
+- name: Ensure tmp directory
+  tempfile:
+    state: directory
+  register: tmp_dir
+
+- name: Ensure Debian downloaded
+  get_url:
+    url: "{{ item.url }}"
+    # dest: "{{ tmp_dir.path }}"        # We want this to not be tmp, so that we don't redownload
+    dest: "/home/{{ ansible_env.SUDO_USER }}/tmp/"
+    mode: 0644
+    checksum: "{{ item.checksum }}"
+  with_items:
+    - url: "{{ debian_netboot_url }}"
+      checksum: "{{ debian_netboot_checksum }}"
+
+- name: Ensure netboot unzipped
+  unarchive:
+    src: "/home/{{ ansible_env.SUDO_USER }}/tmp/netboot.tar.gz"
+    dest: "{{ tmp_dir.path }}"
+    remote_src: yes
+
+- name: Copy boot files
+  copy:
+    src: "{{ tmp_dir.path }}/debian-installer/amd64/{{ item.file }}"
+    dest: /tftpboot/penguin/debian/
+    mode: 0644
+  with_items:
+    - file: linux
+    - file: initrd.gz
+    # - file: pxelinux.0

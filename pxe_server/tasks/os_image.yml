@@ -1,0 +1,25 @@
+---
+- name: Fetch the distribution
+  get_url:
+    url: "{{ os_base_path }}/{{ os_relative_path }}/{{ os_filename }}.xz"
+    dest: ""
+    checksum: "{{ raspios_sha }}"
+
+- name: Expand img
+  unarchive:
+    src: "{{ }}"
+    dest: "{{ dest }}"
+    creates: "{{ dest }}/{{ os_filename }}"
+
+# If tarball isn't needed, you can unarchive directly from the download source
+
+- name: Mount image partitions
+# kpartx -a -v *.img    # add partition mappings; need to find which loop it was added to
+# mkdir {bootmnt,rootmnt}
+# mount /dev/mapper/loop0p1 bootmnt/
+# mount /dev/mapper/loop0p2 rootmnt/
+
+- name: Copy partition files
+
+
+- name: Clean up image mounts

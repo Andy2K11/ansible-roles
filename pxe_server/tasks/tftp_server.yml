@@ -1,0 +1,38 @@
+- name: Ensure dnsmasq installed
+  apt:
+    name: dnsmasq
+    state: present
+
+- name: Copy configuration file
+  copy:
+    src: dnsmasq.deb.conf
+    dest: /etc/dnsmasq.conf
+    # src: dnsmasq.conf
+    # dest: /etc/dnsmasq.conf
+    owner: root
+    group: root
+    mode: 0644
+    # backup: yes
+  notify: restart_dnsmasq
+
+  # /etc/default/dnsmasq ?????
+
+- name: Ensure dnsmasq started
+  service:
+    name: dnsmasq
+    state: started
+    enabled: true
+
+# - name: Ensure tftpd-hpa installed
+#   apt:
+#     name: tftpd-hpa
+#     state: present
+
+- name: Copy boot files
+  copy:
+    src: penguin
+    dest: /tftpboot/
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes

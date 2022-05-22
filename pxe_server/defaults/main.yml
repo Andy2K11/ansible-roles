@@ -1,0 +1,6 @@
+---
+debian_netboot_url: https://deb.debian.org/debian/dists/bullseye/main/installer-amd64/current/images/netboot/netboot.tar.gz
+debian_netboot_checksum: sha256:ec3b71964457f30a57061ea758c12394bf2b792b461c697e61cc2d47053c5878
+
+# Checksums found at:
+# https://deb.debian.org/debian/dists/bullseye/main/installer-amd64/current/images/SHA256SUMS

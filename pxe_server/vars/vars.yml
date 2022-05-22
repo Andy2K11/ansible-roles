@@ -1,0 +1,13 @@
+---
+headless: true
+os_type: raspios_armhf
+# os_type: raspios_lite_armhf
+os_release: "2022-04-07"
+os_basename: "2022-04-04-raspios-bullseye-armhf"
+# os_version: "2022-04-04-raspios-bullseye-armhf-lite"
+# src: "https://downloads.raspberrypi.org/{{ os_type }}/images/{{ os_type }}-{{ os_release }}/{{ os_version }}.img.xz"
+os_base_path: "https://downloads.raspberrypi.org"
+os_relative_path: "{{ os_type }}/images/{{ os_type }}-{{ os_release }}"
+os_filename: "{{ os_version }}.img"
+raspios_sha: 586d42e4c05fbc3eaf7089413f2a45597018187bd69eb4c1cda6e0d7af7dec9e
+raspios_lite_sha: 34987327503fac1076e53f3584f95ca5f41a6a790943f1979262d58d62b04175

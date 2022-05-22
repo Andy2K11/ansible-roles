@@ -1,0 +1,26 @@
+default menu.c32
+prompt 0
+timeout 100
+ontimeout debian-auto
+menu title Virtual Boot Menu
+
+label localboot
+    menu label Boot Local Disk
+    localboot 0
+
+label debian 11
+    menu default
+    menu label Manual Install Debian 11
+    kernel debian/linux
+    append vga=788 initrd=debian/initrd.gz locale=en_GB.UTF-8 keyboard-configuration/layoutcode=gb --- quiet
+
+label debian-auto
+    menu label AutoServer
+    kernel debian/linux
+    append vga=788 initrd=debian/initrd.gz auto=true url=autoserver/penguin/preseed.cfg
+
+label debian 11 tftp1
+    menu label Install Test
+    kernel debian/linux
+    initrd debian/initrd.gz 
+    append vga=788 url=tftp://192.168.61.5/penguin/preseed.cfg auto=true priority=critical interface=auto DEBCONF_DEBUG=5

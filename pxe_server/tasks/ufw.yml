@@ -1,0 +1,16 @@
+---
+- name: Configure open ports with ufw
+  ufw:
+    rule: "{{ item.rule }}"
+    port: "{{ item.port }}"
+    proto: "{{ item.proto }}"
+    src: "{{ item.src }}"
+  with_items:
+    - { rule: 'allow', port: 67, proto: 'udp', src: 'any' }   # dhcp server
+    - { rule: 'allow', port: 4011, proto: 'udp', src: 'any' }   # proxy dhcp
+    - { rule: 'allow', port: 69, proto: 'udp', src: 'any' }   # tftp
+    - { rule: 'allow', port: 2049, proto: 'tcp', src: 'any' }   # nfs
+    - { rule: 'allow', port: 111, proto: 'tcp', src: 'any' }  # rpcbind
+    # - { rule: 'allow', port: 69, proto: 'udp', src: 192.168.0.0/16 }   # tftp
+    # - { rule: 'allow', port: 2049, proto: 'tcp', src: 192.168.0.0/16 }   # nfs
+    # - { rule: 'allow', port: 111, proto: 'tcp', src: 192.168.0.0/16 }  # rpcbind
