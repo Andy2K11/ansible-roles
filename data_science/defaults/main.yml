@@ -1,2 +1,7 @@
 ---
-julia_version: "1.6.3"
+url_base: https://julialang-s3.julialang.org/bin
+bits: x64
+arch: x86_64
+version: 1.7
+patch: 2
+binary: linux   # linux=glibc or use musl
